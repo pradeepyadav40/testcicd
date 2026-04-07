@@ -1,5 +1,4 @@
 # Terraform CI/CD Pipeline with GitHub Actions
-
 ## Prerequisites and Installation
 
 - Ensure you have a GitHub account.
