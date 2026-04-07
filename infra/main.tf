@@ -27,24 +27,9 @@ variable "resource_group_name" {
   default     = "example-rg"
 }
 
-variable "storage_account_name" {
-  description = "Globally unique name for the storage account"
-  type        = string
-  default     = "examplestorageacctcg2026"
-}
-
 resource "azurerm_resource_group" "main" {
   name     = var.resource_group_name
   location = var.location
-}
-
-resource "azurerm_storage_account" "main" {
-  name                     = var.storage_account_name
-  resource_group_name      = azurerm_resource_group.main.name
-  location                 = azurerm_resource_group.main.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-
 }
 
 output "resource_group_name" {
@@ -52,7 +37,3 @@ output "resource_group_name" {
   value       = azurerm_resource_group.main.name
 }
 
-output "storage_account_id" {
-  description = "ID of the storage account"
-  value       = azurerm_storage_account.main.id
-}
