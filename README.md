@@ -6,6 +6,8 @@
 - Install Terraform v1.14.7 on your local machine.
 - Set up AWS CLI.
 
+- 
+
 ## AWS/Azure/GCP Account Setup
 - Create accounts on AWS, Azure, and GCP.
 - Set up necessary services like S3 buckets and DynamoDB tables for state management.
