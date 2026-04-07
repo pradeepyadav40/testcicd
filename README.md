@@ -18,8 +18,7 @@
 3. Add secrets for AWS_ACCOUNT_ID and AWS_ROLE_NAME.
 4. Configure OIDC in AWS IAM to allow GitHub Actions to assume roles.
 
-## GitHub Secrets Setup
-
+## GitHub Secrets Setup   
 - `AWS_ACCOUNT_ID`: Your AWS account ID.
 - `AWS_ROLE_NAME`: The role name for AWS access.
 - `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`
