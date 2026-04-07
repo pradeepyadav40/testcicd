@@ -1,37 +1,58 @@
 terraform {
   required_version = "= 1.14.7"
+
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
     }
   }
-  backend "s3" {
-    bucket         = "terraform-state-bucket"
-    key            = "prod/terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "terraform-locks"
-    encrypt        = true
-  }
 }
 
-provider "aws" {
-  region = var.aws_region
+provider "azurerm" {
+  features {}
 }
 
-variable "aws_region" {
-  description = "The AWS region to deploy resources"
+# Basic example infrastructure: a resource group and storage account
+
+variable "location" {
+  description = "Azure region for resources"
   type        = string
+  default     = "eastus"
 }
 
-resource "aws_s3_bucket" "example" {
-  bucket = "example-bucket"
+variable "resource_group_name" {
+  description = "Name of the resource group"
+  type        = string
+  default     = "example-rg"
 }
 
-output "bucket_name" {
-  value = aws_s3_bucket.example.bucket
+variable "storage_account_name" {
+  description = "Globally unique name for the storage account"
+  type        = string
+  default     = "examplestorageacctcg2026"
 }
 
-locals {
-  bucket_prefix = "example-"
+resource "azurerm_resource_group" "main" {
+  name     = var.resource_group_name
+  location = var.location
+}
+
+resource "azurerm_storage_account" "main" {
+  name                     = var.storage_account_name
+  resource_group_name      = azurerm_resource_group.main.name
+  location                 = azurerm_resource_group.main.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+}
+
+output "resource_group_name" {
+  description = "Name of the created resource group"
+  value       = azurerm_resource_group.main.name
+}
+
+output "storage_account_id" {
+  description = "ID of the storage account"
+  value       = azurerm_storage_account.main.id
 }
