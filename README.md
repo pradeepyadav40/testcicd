@@ -4,6 +4,7 @@
 - Ensure you have a GitHub account.
 - Install Terraform v1.14.7 on your local machine.
 - Set up AWS CLI.
+- 
 
 
 ## AWS/Azure/GCP Account Setup
